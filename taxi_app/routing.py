@@ -1,3 +1,8 @@
-from channels.routing import ProtocolTypeRouter
+from channels.routing import ProtocolTypeRouter, URLRouter
+from django.urls import path
 
-application = ProtocolTypeRouter({})
+from trips.consumers import TaxiConsumer
+
+application = ProtocolTypeRouter({
+    'websocket': URLRouter([path('taxi/', TaxiConsumer.as_asgi()),]),
+})
